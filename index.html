@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BuscaCid</title>
+</head>
+<body>
+  <h1>BuscaCid</h1>
+  <input type="text" id="search" placeholder="Digite um código ou palavra-chave" oninput="searchCID()" style="width: 80%; padding: 10px;" />
+  <div id="results"></div>
+
+  <script src="data.js"></script>
+  <script>
+    const input = document.getElementById("search");
+    const results = document.getElementById("results");
+
+    function searchCID() {
+      const query = input.value.toLowerCase();
+      const output = data.filter(entry =>
+        entry.COD_SUBCATEGORIA.toLowerCase().includes(query) ||
+        entry.DESC_SUBCATEGORIA.toLowerCase().includes(query) ||
+        entry.DESC_CATEGORIA.toLowerCase().includes(query) ||
+        entry.DESC_GRUPO.toLowerCase().includes(query) ||
+        entry.DESC_CAPITULO.toLowerCase().includes(query)
+      );
+      results.innerHTML = "<ul>" + output.map(e => "<li><strong>" + e.COD_SUBCATEGORIA + "</strong>: " + e.DESC_SUBCATEGORIA + "</li>").join("") + "</ul>";
+    }
+  </script>
+</body>
+</html>
